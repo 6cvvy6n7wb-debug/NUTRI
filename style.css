@@ -604,3 +604,45 @@ footer p {
     background-color: #eef2f0;
     color: #65756e;
 }
+/* =========================
+   RESEARCH DASHBOARD POLISH
+========================= */
+
+.dashboard-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #23865a;
+}
+
+.dashboard-card-value {
+    line-height: 1.1;
+}
+
+.dashboard-card-description {
+    line-height: 1.5;
+}
+
+.research-summary {
+    border: 1px solid #e1ebe5;
+}
+
+.research-summary h2 {
+    color: #1f3d32;
+}
+
+.research-table th {
+    font-weight: 700;
+}
+
+.research-table tr:hover td {
+    background-color: #f8fbf9;
+}
