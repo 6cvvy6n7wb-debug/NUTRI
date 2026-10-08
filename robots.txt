@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://6cvvy6n7wb-debug.github.io/NUTRI/sitemap.xml
