@@ -89,6 +89,23 @@
             padding: 20px;
             border-radius: 15px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: 0.2s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .dashboard-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #23865a;
         }
 
         .dashboard-card h3 {
@@ -100,6 +117,24 @@
         .dashboard-card p {
             margin: 0;
             color: #52665c;
+        }
+
+        .respondent-tools {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .respondent-tools input,
+        .respondent-tools select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d5dfd9;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: white;
         }
 
         .respondent-card {
@@ -193,6 +228,10 @@
             background-color: #f4f9f6;
         }
 
+        .research-dashboard tr:hover td {
+            background-color: #f8fbf9;
+        }
+
         .research-dashboard-wrapper {
             overflow-x: auto;
         }
@@ -266,6 +305,86 @@
             font-style: italic;
         }
 
+        .research-summary {
+            background-color: white;
+            max-width: 900px;
+            margin-top: 30px;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid #e1ebe5;
+        }
+
+        .research-summary h2 {
+            margin-top: 0;
+            color: #1f3d32;
+        }
+
+        .research-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .research-info div {
+            background-color: #f4f9f6;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .research-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        .research-table th,
+        .research-table td {
+            border: 1px solid #d5dfd9;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .research-table th {
+            background-color: #f4f9f6;
+            font-weight: 700;
+        }
+
+        .research-table tr:hover td {
+            background-color: #f8fbf9;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .export-buttons button {
+            margin-top: 15px;
+        }
+
+        .risk-low {
+            background-color: #e8f7ee;
+            color: #237a4b;
+        }
+
+        .risk-moderate {
+            background-color: #fff5d9;
+            color: #9a6b00;
+        }
+
+        .risk-high {
+            background-color: #fde8e8;
+            color: #b42318;
+        }
+
+        .risk-no-data {
+            background-color: #eef2f0;
+            color: #65756e;
+        }
+
         @media (max-width: 800px) {
 
             .dashboard-grid {
@@ -274,6 +393,17 @@
 
             .meal-grid,
             .visualization-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .respondent-tools {
+                grid-template-columns: 1fr;
+            }
+
+            .research-info {
                 grid-template-columns: 1fr;
             }
         }
@@ -304,7 +434,8 @@
                 padding: 20px;
             }
 
-            .meal-breakdown {
+            .meal-breakdown,
+            .research-summary {
                 display: block !important;
                 box-shadow: none;
                 max-width: 100%;
@@ -326,7 +457,6 @@
     </div>
 </nav>
 
-
 <section class="tracker">
 
     <p class="small-title">NUTRI SYSTEM</p>
@@ -336,7 +466,6 @@
     <p>
         Record dietary intake and water consumption for research data collection.
     </p>
-
 
     <!-- RESPONDENT PROFILE -->
 
@@ -379,7 +508,6 @@
 
     </div>
 
-
     <!-- DIETARY INTAKE -->
 
     <div class="tracker-form">
@@ -395,7 +523,6 @@
             <option value="Dinner">Dinner</option>
             <option value="Snack">Snack</option>
         </select>
-
 
         <label for="food">Food or Beverage</label>
 
@@ -414,7 +541,6 @@
 
         </select>
 
-
         <label for="category">Category</label>
 
         <input
@@ -424,7 +550,6 @@
             placeholder="Automatically assigned"
         >
 
-
         <label for="serving">Serving</label>
 
         <select id="serving">
@@ -432,7 +557,6 @@
                 Select food first
             </option>
         </select>
-
 
         <label for="waterIntake">
             Water Intake (mL)
@@ -445,13 +569,11 @@
             placeholder="Example: 500"
         >
 
-
         <button onclick="addFood()">
             Add Food
         </button>
 
     </div>
-
 
     <!-- TODAY'S DATA -->
 
@@ -466,7 +588,6 @@
         </div>
 
     </div>
-
 
     <!-- DAILY DASHBOARD -->
 
@@ -511,7 +632,6 @@
 
     </div>
 
-
     <!-- MEAL BREAKDOWN -->
 
     <div class="meal-breakdown">
@@ -521,136 +641,44 @@
         <div class="meal-grid">
 
             <div class="meal-card">
-
                 <h3>Breakfast</h3>
-
-                <p>
-                    Calories:
-                    <strong id="breakfastCalories">0</strong> kcal
-                </p>
-
-                <p>
-                    Carbohydrates:
-                    <strong id="breakfastCarbs">0</strong> g
-                </p>
-
-                <p>
-                    Protein:
-                    <strong id="breakfastProtein">0</strong> g
-                </p>
-
-                <p>
-                    Fat:
-                    <strong id="breakfastFat">0</strong> g
-                </p>
-
-                <p>
-                    Water:
-                    <strong id="breakfastWater">0</strong> mL
-                </p>
-
+                <p>Calories: <strong id="breakfastCalories">0</strong> kcal</p>
+                <p>Carbohydrates: <strong id="breakfastCarbs">0</strong> g</p>
+                <p>Protein: <strong id="breakfastProtein">0</strong> g</p>
+                <p>Fat: <strong id="breakfastFat">0</strong> g</p>
+                <p>Water: <strong id="breakfastWater">0</strong> mL</p>
             </div>
 
-
             <div class="meal-card">
-
                 <h3>Lunch</h3>
-
-                <p>
-                    Calories:
-                    <strong id="lunchCalories">0</strong> kcal
-                </p>
-
-                <p>
-                    Carbohydrates:
-                    <strong id="lunchCarbs">0</strong> g
-                </p>
-
-                <p>
-                    Protein:
-                    <strong id="lunchProtein">0</strong> g
-                </p>
-
-                <p>
-                    Fat:
-                    <strong id="lunchFat">0</strong> g
-                </p>
-
-                <p>
-                    Water:
-                    <strong id="lunchWater">0</strong> mL
-                </p>
-
+                <p>Calories: <strong id="lunchCalories">0</strong> kcal</p>
+                <p>Carbohydrates: <strong id="lunchCarbs">0</strong> g</p>
+                <p>Protein: <strong id="lunchProtein">0</strong> g</p>
+                <p>Fat: <strong id="lunchFat">0</strong> g</p>
+                <p>Water: <strong id="lunchWater">0</strong> mL</p>
             </div>
 
-
             <div class="meal-card">
-
                 <h3>Dinner</h3>
-
-                <p>
-                    Calories:
-                    <strong id="dinnerCalories">0</strong> kcal
-                </p>
-
-                <p>
-                    Carbohydrates:
-                    <strong id="dinnerCarbs">0</strong> g
-                </p>
-
-                <p>
-                    Protein:
-                    <strong id="dinnerProtein">0</strong> g
-                </p>
-
-                <p>
-                    Fat:
-                    <strong id="dinnerFat">0</strong> g
-                </p>
-
-                <p>
-                    Water:
-                    <strong id="dinnerWater">0</strong> mL
-                </p>
-
+                <p>Calories: <strong id="dinnerCalories">0</strong> kcal</p>
+                <p>Carbohydrates: <strong id="dinnerCarbs">0</strong> g</p>
+                <p>Protein: <strong id="dinnerProtein">0</strong> g</p>
+                <p>Fat: <strong id="dinnerFat">0</strong> g</p>
+                <p>Water: <strong id="dinnerWater">0</strong> mL</p>
             </div>
 
-
             <div class="meal-card">
-
                 <h3>Snack</h3>
-
-                <p>
-                    Calories:
-                    <strong id="snackCalories">0</strong> kcal
-                </p>
-
-                <p>
-                    Carbohydrates:
-                    <strong id="snackCarbs">0</strong> g
-                </p>
-
-                <p>
-                    Protein:
-                    <strong id="snackProtein">0</strong> g
-                </p>
-
-                <p>
-                    Fat:
-                    <strong id="snackFat">0</strong> g
-                </p>
-
-                <p>
-                    Water:
-                    <strong id="snackWater">0</strong> mL
-                </p>
-
+                <p>Calories: <strong id="snackCalories">0</strong> kcal</p>
+                <p>Carbohydrates: <strong id="snackCarbs">0</strong> g</p>
+                <p>Protein: <strong id="snackProtein">0</strong> g</p>
+                <p>Fat: <strong id="snackFat">0</strong> g</p>
+                <p>Water: <strong id="snackWater">0</strong> mL</p>
             </div>
 
         </div>
 
     </div>
-
 
     <!-- RISK INFERENCE -->
 
@@ -667,9 +695,7 @@
 
             <p>
                 <strong>Current Respondent:</strong>
-                <span id="riskRespondent">
-                    No respondent
-                </span>
+                <span id="riskRespondent">No respondent</span>
             </p>
 
             <p>
@@ -677,20 +703,13 @@
                 <span id="riskScore">0</span> / 6
             </p>
 
-            <div
-                id="riskLevel"
-                class="risk-level"
-            >
+            <div id="riskLevel" class="risk-level">
                 NO DATA
             </div>
 
-            <span
-                id="riskBadge"
-                class="risk-badge"
-            >
+            <span id="riskBadge" class="risk-badge risk-no-data">
                 No Data
             </span>
-
 
             <h3>Water Intake Progress</h3>
 
@@ -708,7 +727,6 @@
 
             </div>
 
-
             <h3>Risk Factors</h3>
 
             <div id="riskFactors">
@@ -718,7 +736,6 @@
                 </p>
 
             </div>
-
 
             <h3>Health Reminder</h3>
 
@@ -730,7 +747,6 @@
         </div>
 
     </div>
-
 
     <!-- RESPONDENT DATABASE -->
 
@@ -746,10 +762,31 @@
             New Respondent
         </button>
 
+        <div class="respondent-tools">
+
+            <input
+                type="text"
+                id="respondentSearch"
+                placeholder="Search Respondent ID..."
+                oninput="renderRespondentList()"
+            >
+
+            <select
+                id="riskFilter"
+                onchange="renderRespondentList()"
+            >
+                <option value="ALL">All Risk Levels</option>
+                <option value="LOW">Low</option>
+                <option value="MODERATE">Moderate</option>
+                <option value="HIGH">High</option>
+                <option value="NO DATA">No Data</option>
+            </select>
+
+        </div>
+
         <div id="respondentList"></div>
 
     </div>
-
 
     <!-- RESEARCH DASHBOARD -->
 
@@ -761,104 +798,54 @@
             Summary of the respondents currently stored in the browser.
         </p>
 
-
         <div class="dashboard-grid">
 
             <div class="dashboard-card">
-
                 <p>Total Respondents</p>
-
-                <h3 id="dashboardTotal">
-                    0
-                </h3>
-
+                <h3 id="dashboardTotal">0</h3>
             </div>
 
-
             <div class="dashboard-card">
-
                 <p>Low Risk</p>
-
-                <h3 id="dashboardLow">
-                    0
-                </h3>
-
+                <h3 id="dashboardLow">0</h3>
             </div>
 
-
             <div class="dashboard-card">
-
                 <p>Moderate Risk</p>
-
-                <h3 id="dashboardModerate">
-                    0
-                </h3>
-
+                <h3 id="dashboardModerate">0</h3>
             </div>
 
-
             <div class="dashboard-card">
-
                 <p>High Risk</p>
-
-                <h3 id="dashboardHigh">
-                    0
-                </h3>
-
+                <h3 id="dashboardHigh">0</h3>
             </div>
 
         </div>
-
 
         <div class="dashboard-grid">
 
             <div class="dashboard-card">
-
                 <p>Average Water Intake</p>
-
-                <h3 id="dashboardWater">
-                    0
-                </h3>
-
+                <h3 id="dashboardWater">0</h3>
                 <p>mL</p>
-
             </div>
 
-
             <div class="dashboard-card">
-
                 <p>Average Dietary Entries</p>
-
-                <h3 id="dashboardEntries">
-                    0
-                </h3>
-
+                <h3 id="dashboardEntries">0</h3>
             </div>
 
-
             <div class="dashboard-card">
-
                 <p>No Data</p>
-
-                <h3 id="dashboardNoData">
-                    0
-                </h3>
-
+                <h3 id="dashboardNoData">0</h3>
             </div>
 
-
             <div class="dashboard-card">
-
                 <p>Respondents With Data</p>
-
-                <h3 id="dashboardWithData">
-                    0
-                </h3>
-
+                <h3 id="dashboardWithData">0</h3>
             </div>
 
         </div>
-
 
         <h3>
             Respondent Risk Summary
@@ -869,18 +856,14 @@
             <table>
 
                 <thead>
-
                     <tr>
-
                         <th>Respondent ID</th>
                         <th>Grade</th>
                         <th>Entries</th>
                         <th>Water (mL)</th>
                         <th>Score</th>
                         <th>Risk Level</th>
-
                     </tr>
-
                 </thead>
 
                 <tbody id="dashboardTableBody"></tbody>
@@ -890,7 +873,6 @@
         </div>
 
     </div>
-
 
     <!-- DATA VISUALIZATION -->
 
@@ -903,17 +885,11 @@
             data recorded in the NUTRI system.
         </p>
 
-
         <div class="visualization-grid">
-
-
-            <!-- RISK CHART -->
 
             <div class="chart-card">
 
-                <h3>
-                    UTI Risk Level Distribution
-                </h3>
+                <h3>UTI Risk Level Distribution</h3>
 
                 <div class="chart-container">
 
@@ -937,14 +913,9 @@
 
             </div>
 
-
-            <!-- WATER CHART -->
-
             <div class="chart-card">
 
-                <h3>
-                    Average Water Intake
-                </h3>
+                <h3>Average Water Intake</h3>
 
                 <div class="chart-container">
 
@@ -963,14 +934,9 @@
 
             </div>
 
-
-            <!-- ENTRIES CHART -->
-
             <div class="chart-card">
 
-                <h3>
-                    Average Dietary Entries
-                </h3>
+                <h3>Average Dietary Entries</h3>
 
                 <div class="chart-container">
 
@@ -989,51 +955,36 @@
 
             </div>
 
-
-            <!-- RESPONDENT OVERVIEW -->
-
             <div class="chart-card">
 
-                <h3>
-                    Respondent Overview
-                </h3>
+                <h3>Respondent Overview</h3>
 
                 <div class="visualization-summary">
 
                     <p>
                         Total Respondents:
-                        <strong id="visualTotal">
-                            0
-                        </strong>
+                        <strong id="visualTotal">0</strong>
                     </p>
 
                     <p>
                         Respondents With Data:
-                        <strong id="visualWithData">
-                            0
-                        </strong>
+                        <strong id="visualWithData">0</strong>
                     </p>
 
                     <p>
                         Respondents Without Data:
-                        <strong id="visualNoData">
-                            0
-                        </strong>
+                        <strong id="visualNoData">0</strong>
                     </p>
 
                     <p>
                         Average Water Intake:
-                        <strong id="visualAverageWater">
-                            0
-                        </strong>
+                        <strong id="visualAverageWater">0</strong>
                         mL
                     </p>
 
                     <p>
                         Average Dietary Entries:
-                        <strong id="visualAverageEntries">
-                            0
-                        </strong>
+                        <strong id="visualAverageEntries">0</strong>
                     </p>
 
                 </div>
@@ -1043,7 +994,6 @@
         </div>
 
     </div>
-
 
     <!-- RESEARCH SUMMARY -->
 
@@ -1057,62 +1007,45 @@
 
             <div>
                 <strong>Respondent ID:</strong>
-                <span id="summaryRespondentId">
-                    -
-                </span>
+                <span id="summaryRespondentId">-</span>
             </div>
 
             <div>
                 <strong>Age:</strong>
-                <span id="summaryAge">
-                    -
-                </span>
+                <span id="summaryAge">-</span>
             </div>
 
             <div>
                 <strong>Sex:</strong>
-                <span id="summarySex">
-                    -
-                </span>
+                <span id="summarySex">-</span>
             </div>
 
             <div>
                 <strong>Grade:</strong>
-                <span id="summaryGrade">
-                    -
-                </span>
+                <span id="summaryGrade">-</span>
             </div>
 
             <div>
                 <strong>Section:</strong>
-                <span id="summarySection">
-                    -
-                </span>
+                <span id="summarySection">-</span>
             </div>
 
             <div>
                 <strong>Date:</strong>
-                <span id="summaryDate">
-                    -
-                </span>
+                <span id="summaryDate">-</span>
             </div>
 
             <div>
                 <strong>Risk Score:</strong>
-                <span id="summaryRiskScore">
-                    -
-                </span>
+                <span id="summaryRiskScore">-</span>
             </div>
 
             <div>
                 <strong>Risk Level:</strong>
-                <span id="summaryRiskLevel">
-                    -
-                </span>
+                <span id="summaryRiskLevel">-</span>
             </div>
 
         </div>
-
 
         <h3>
             Overall Dietary Data
@@ -1120,46 +1053,33 @@
 
         <p>
             Total Food Entries:
-            <strong id="summaryEntries">
-                0
-            </strong>
+            <strong id="summaryEntries">0</strong>
         </p>
 
         <p>
             Total Water:
-            <strong id="summaryWater">
-                0
-            </strong> mL
+            <strong id="summaryWater">0</strong> mL
         </p>
 
         <p>
             Total Calories:
-            <strong id="summaryCalories">
-                0
-            </strong> kcal
+            <strong id="summaryCalories">0</strong> kcal
         </p>
 
         <p>
             Total Carbohydrates:
-            <strong id="summaryCarbs">
-                0
-            </strong> g
+            <strong id="summaryCarbs">0</strong> g
         </p>
 
         <p>
             Total Protein:
-            <strong id="summaryProtein">
-                0
-            </strong> g
+            <strong id="summaryProtein">0</strong> g
         </p>
 
         <p>
             Total Fat:
-            <strong id="summaryFat">
-                0
-            </strong> g
+            <strong id="summaryFat">0</strong> g
         </p>
-
 
         <h3>
             Recorded Food Entries
@@ -1172,14 +1092,12 @@
                 <thead>
 
                     <tr>
-
                         <th>Meal</th>
                         <th>Food/Beverage</th>
                         <th>Category</th>
                         <th>Serving</th>
                         <th>Water</th>
                         <th>Calories</th>
-
                     </tr>
 
                 </thead>
@@ -1189,7 +1107,6 @@
             </table>
 
         </div>
-
 
         <div class="export-buttons">
 
@@ -1208,7 +1125,6 @@
         </div>
 
     </div>
-
 
     <!-- DATA CONTROLS -->
 
@@ -1234,7 +1150,6 @@
 
 </section>
 
-
 <footer>
 
     <p>
@@ -1242,7 +1157,6 @@
     </p>
 
 </footer>
-
 
 <script>
 
@@ -1308,7 +1222,6 @@ const nutrientDatabase = {
 
 };
 
-
 const servingOptions = {
 
     rice: [
@@ -1352,7 +1265,6 @@ const servingOptions = {
 
 };
 
-
 // =====================================================
 // VARIABLES
 // =====================================================
@@ -1368,7 +1280,6 @@ let currentRespondentId =
     ) || "";
 
 let entries = [];
-
 
 // =====================================================
 // PROFILE
@@ -1390,12 +1301,10 @@ function saveRespondentProfile() {
         return;
     }
 
-
     const respondent =
         respondents[id] || {
             entries: []
         };
-
 
     respondent.id = id;
 
@@ -1424,37 +1333,26 @@ function saveRespondentProfile() {
             "dateCollected"
         ).value;
 
-
     if (!respondent.entries) {
-
         respondent.entries = [];
-
     }
 
+    respondents[id] = respondent;
 
-    respondents[id] =
-        respondent;
+    currentRespondentId = id;
 
-    currentRespondentId =
-        id;
-
-    entries =
-        respondent.entries;
-
+    entries = respondent.entries;
 
     saveData();
-
 
     document.getElementById(
         "profileStatus"
     ).textContent =
         "Respondent profile saved successfully.";
 
-
     renderAll();
 
 }
-
 
 // =====================================================
 // LOAD RESPONDENT
@@ -1466,70 +1364,57 @@ function loadRespondent(id) {
         return;
     }
 
-
-    currentRespondentId =
-        id;
+    currentRespondentId = id;
 
     entries =
         respondents[id].entries || [];
 
-
     const respondent =
         respondents[id];
-
 
     document.getElementById(
         "respondentId"
     ).value =
         respondent.id || "";
 
-
     document.getElementById(
         "age"
     ).value =
         respondent.age || "";
-
 
     document.getElementById(
         "sex"
     ).value =
         respondent.sex || "";
 
-
     document.getElementById(
         "gradeLevel"
     ).value =
         respondent.grade || "";
-
 
     document.getElementById(
         "section"
     ).value =
         respondent.section || "";
 
-
     document.getElementById(
         "dateCollected"
     ).value =
         respondent.date || "";
-
 
     localStorage.setItem(
         "nutriCurrentRespondent",
         currentRespondentId
     );
 
-
     document.getElementById(
         "profileStatus"
     ).textContent =
         "Respondent loaded successfully.";
 
-
     renderAll();
 
 }
-
 
 // =====================================================
 // NEW RESPONDENT
@@ -1545,7 +1430,6 @@ function newRespondent() {
         "nutriCurrentRespondent"
     );
 
-
     document.getElementById(
         "respondentId"
     ).value = "";
@@ -1570,17 +1454,14 @@ function newRespondent() {
         "dateCollected"
     ).value = "";
 
-
     document.getElementById(
         "profileStatus"
     ).textContent =
         "Ready for a new respondent.";
 
-
     renderAll();
 
 }
-
 
 // =====================================================
 // FOOD OPTIONS
@@ -1603,9 +1484,7 @@ function updateFoodOptions() {
             "serving"
         );
 
-
     serving.innerHTML = "";
-
 
     if (
         !food ||
@@ -1613,7 +1492,6 @@ function updateFoodOptions() {
     ) {
 
         category.value = "";
-
 
         const option =
             document.createElement(
@@ -1628,11 +1506,9 @@ function updateFoodOptions() {
         return;
     }
 
-
     category.value =
         nutrientDatabase[food]
             .category;
-
 
     servingOptions[food]
         .forEach(item => {
@@ -1656,7 +1532,6 @@ function updateFoodOptions() {
 
 }
 
-
 // =====================================================
 // ADD FOOD
 // =====================================================
@@ -1671,7 +1546,6 @@ function addFood() {
 
         return;
     }
-
 
     const meal =
         document.getElementById(
@@ -1695,7 +1569,6 @@ function addFood() {
             ).value
         ) || 0;
 
-
     if (!meal) {
 
         alert(
@@ -1704,7 +1577,6 @@ function addFood() {
 
         return;
     }
-
 
     if (!food) {
 
@@ -1715,7 +1587,6 @@ function addFood() {
         return;
     }
 
-
     if (!serving.value) {
 
         alert(
@@ -1725,22 +1596,18 @@ function addFood() {
         return;
     }
 
-
     const multiplier =
         Number(
             serving.value
         );
 
-
     const nutrient =
         nutrientDatabase[food];
-
 
     const selectedServing =
         serving.options[
             serving.selectedIndex
         ].text;
-
 
     const entry = {
 
@@ -1782,18 +1649,14 @@ function addFood() {
 
     };
 
-
     entries.push(entry);
-
 
     respondents[
         currentRespondentId
     ].entries =
         entries;
 
-
     saveData();
-
 
     document.getElementById(
         "meal"
@@ -1816,11 +1679,9 @@ function addFood() {
     ).innerHTML =
         '<option value="">Select food first</option>';
 
-
     renderAll();
 
 }
-
 
 // =====================================================
 // REMOVE ENTRY
@@ -1834,7 +1695,6 @@ function removeEntry(id) {
                 entry.id !== id
         );
 
-
     if (
         currentRespondentId &&
         respondents[currentRespondentId]
@@ -1847,13 +1707,11 @@ function removeEntry(id) {
 
     }
 
-
     saveData();
 
     renderAll();
 
 }
-
 
 // =====================================================
 // SAVE DATA
@@ -1868,7 +1726,6 @@ function saveData() {
         )
     );
 
-
     if (currentRespondentId) {
 
         localStorage.setItem(
@@ -1879,7 +1736,6 @@ function saveData() {
     }
 
 }
-
 
 // =====================================================
 // TOTALS
@@ -1892,7 +1748,6 @@ function calculateTotalsForEntries(data) {
     let protein = 0;
     let fat = 0;
     let water = 0;
-
 
     data.forEach(entry => {
 
@@ -1923,19 +1778,15 @@ function calculateTotalsForEntries(data) {
 
     });
 
-
     return {
-
         calories,
         carbs,
         protein,
         fat,
         water
-
     };
 
 }
-
 
 function calculateTotals() {
 
@@ -1944,7 +1795,6 @@ function calculateTotals() {
     );
 
 }
-
 
 // =====================================================
 // RENDER ENTRIES
@@ -1957,9 +1807,7 @@ function renderEntries() {
             "entriesList"
         );
 
-
     container.innerHTML = "";
-
 
     if (entries.length === 0) {
 
@@ -1969,7 +1817,6 @@ function renderEntries() {
         return;
     }
 
-
     entries.forEach(entry => {
 
         const div =
@@ -1977,10 +1824,8 @@ function renderEntries() {
                 "div"
             );
 
-
         div.className =
             "food-entry";
-
 
         div.innerHTML = `
 
@@ -2035,7 +1880,6 @@ function renderEntries() {
 
         `;
 
-
         container.appendChild(
             div
         );
@@ -2043,7 +1887,6 @@ function renderEntries() {
     });
 
 }
-
 
 // =====================================================
 // DAILY DASHBOARD
@@ -2054,18 +1897,15 @@ function renderDashboard() {
     const totals =
         calculateTotals();
 
-
     document.getElementById(
         "totalEntries"
     ).textContent =
         entries.length;
 
-
     document.getElementById(
         "totalWater"
     ).textContent =
         totals.water;
-
 
     const categories =
         new Set(
@@ -2075,30 +1915,25 @@ function renderDashboard() {
             )
         );
 
-
     document.getElementById(
         "totalCategories"
     ).textContent =
         categories.size;
-
 
     document.getElementById(
         "totalCalories"
     ).textContent =
         totals.calories.toFixed(1);
 
-
     document.getElementById(
         "totalCarbs"
     ).textContent =
         totals.carbs.toFixed(1);
 
-
     document.getElementById(
         "totalProtein"
     ).textContent =
         totals.protein.toFixed(1);
-
 
     document.getElementById(
         "totalFat"
@@ -2106,7 +1941,6 @@ function renderDashboard() {
         totals.fat.toFixed(1);
 
 }
-
 
 // =====================================================
 // MEAL BREAKDOWN
@@ -2150,13 +1984,11 @@ function renderMealBreakdown() {
 
     };
 
-
     entries.forEach(entry => {
 
         if (!meals[entry.meal]) {
             return;
         }
-
 
         meals[
             entry.meal
@@ -2165,14 +1997,12 @@ function renderMealBreakdown() {
                 entry.calories
             ) || 0;
 
-
         meals[
             entry.meal
         ].carbs +=
             Number(
                 entry.carbohydrates
             ) || 0;
-
 
         meals[
             entry.meal
@@ -2181,14 +2011,12 @@ function renderMealBreakdown() {
                 entry.protein
             ) || 0;
 
-
         meals[
             entry.meal
         ].fat +=
             Number(
                 entry.fat
             ) || 0;
-
 
         meals[
             entry.meal
@@ -2199,7 +2027,6 @@ function renderMealBreakdown() {
 
     });
 
-
     const names = {
 
         Breakfast: "breakfast",
@@ -2209,13 +2036,11 @@ function renderMealBreakdown() {
 
     };
 
-
     Object.keys(meals)
         .forEach(meal => {
 
             const prefix =
                 names[meal];
-
 
             document.getElementById(
                 prefix + "Calories"
@@ -2224,14 +2049,12 @@ function renderMealBreakdown() {
                     meal
                 ].calories.toFixed(1);
 
-
             document.getElementById(
                 prefix + "Carbs"
             ).textContent =
                 meals[
                     meal
                 ].carbs.toFixed(1);
-
 
             document.getElementById(
                 prefix + "Protein"
@@ -2240,14 +2063,12 @@ function renderMealBreakdown() {
                     meal
                 ].protein.toFixed(1);
 
-
             document.getElementById(
                 prefix + "Fat"
             ).textContent =
                 meals[
                     meal
                 ].fat.toFixed(1);
-
 
             document.getElementById(
                 prefix + "Water"
@@ -2259,7 +2080,6 @@ function renderMealBreakdown() {
         });
 
 }
-
 
 // =====================================================
 // RISK
@@ -2287,7 +2107,6 @@ function calculateRisk(
 
     }
 
-
     let water = 0;
 
     const categories =
@@ -2295,7 +2114,6 @@ function calculateRisk(
 
     const meals =
         new Set();
-
 
     respondentEntries.forEach(
         entry => {
@@ -2305,7 +2123,6 @@ function calculateRisk(
                     entry.water
                 ) || 0;
 
-
             if (entry.category) {
 
                 categories.add(
@@ -2313,7 +2130,6 @@ function calculateRisk(
                 );
 
             }
-
 
             if (entry.meal) {
 
@@ -2326,11 +2142,9 @@ function calculateRisk(
         }
     );
 
-
     let score = 0;
 
     const factors = [];
-
 
     if (water >= 2000) {
 
@@ -2354,7 +2168,6 @@ function calculateRisk(
 
     }
 
-
     if (categories.size >= 4) {
 
         score += 0;
@@ -2376,7 +2189,6 @@ function calculateRisk(
         );
 
     }
-
 
     if (meals.size >= 3) {
 
@@ -2400,9 +2212,7 @@ function calculateRisk(
 
     }
 
-
     let level = "LOW";
-
 
     if (score >= 5) {
 
@@ -2413,7 +2223,6 @@ function calculateRisk(
         level = "MODERATE";
 
     }
-
 
     return {
 
@@ -2430,7 +2239,6 @@ function calculateRisk(
 
 }
 
-
 // =====================================================
 // RISK DISPLAY
 // =====================================================
@@ -2440,39 +2248,51 @@ function updateRiskInference() {
     const risk =
         calculateRisk();
 
-
     document.getElementById(
         "riskRespondent"
     ).textContent =
         currentRespondentId ||
         "No respondent";
 
-
     document.getElementById(
         "riskScore"
     ).textContent =
         risk.score;
 
+    const riskLevelElement =
+        document.getElementById(
+            "riskLevel"
+        );
 
-    document.getElementById(
-        "riskLevel"
-    ).textContent =
+    riskLevelElement.textContent =
         risk.level;
 
+    const riskBadge =
+        document.getElementById(
+            "riskBadge"
+        );
 
-    document.getElementById(
-        "riskBadge"
-    ).textContent =
+    riskBadge.textContent =
         risk.level === "NO DATA"
             ? "No Data"
             : risk.level + " Risk";
 
+    riskBadge.className =
+        "risk-badge " +
+        (
+            risk.level === "LOW"
+                ? "risk-low"
+                : risk.level === "MODERATE"
+                    ? "risk-moderate"
+                    : risk.level === "HIGH"
+                        ? "risk-high"
+                        : "risk-no-data"
+        );
 
     document.getElementById(
         "waterProgressText"
     ).textContent =
         risk.water;
-
 
     const percentage =
         Math.min(
@@ -2480,21 +2300,17 @@ function updateRiskInference() {
             100
         );
 
-
     document.getElementById(
         "waterProgressBar"
     ).style.width =
         percentage + "%";
-
 
     const factorContainer =
         document.getElementById(
             "riskFactors"
         );
 
-
     factorContainer.innerHTML = "";
-
 
     if (
         risk.level === "NO DATA"
@@ -2503,7 +2319,6 @@ function updateRiskInference() {
         factorContainer.innerHTML =
             '<p class="no-data">No dietary data available.</p>';
 
-
         document.getElementById(
             "healthReminder"
         ).textContent =
@@ -2511,7 +2326,6 @@ function updateRiskInference() {
 
         return;
     }
-
 
     if (
         risk.factors.length === 0
@@ -2530,14 +2344,11 @@ function updateRiskInference() {
                         "div"
                     );
 
-
                 div.className =
                     "risk-factor";
 
-
                 div.textContent =
                     factor;
-
 
                 factorContainer.appendChild(
                     div
@@ -2547,7 +2358,6 @@ function updateRiskInference() {
         );
 
     }
-
 
     if (
         risk.level === "LOW"
@@ -2578,9 +2388,8 @@ function updateRiskInference() {
 
 }
 
-
 // =====================================================
-// RESPONDENT LIST
+// RESPONDENT LIST + SEARCH + FILTER
 // =====================================================
 
 function renderRespondentList() {
@@ -2590,15 +2399,34 @@ function renderRespondentList() {
             "respondentList"
         );
 
+    const searchInput =
+        document.getElementById(
+            "respondentSearch"
+        );
+
+    const riskFilter =
+        document.getElementById(
+            "riskFilter"
+        );
 
     container.innerHTML = "";
 
+    const search =
+        searchInput
+            ? searchInput.value
+                .trim()
+                .toLowerCase()
+            : "";
+
+    const filter =
+        riskFilter
+            ? riskFilter.value
+            : "ALL";
 
     const ids =
         Object.keys(
             respondents
         );
-
 
     if (ids.length === 0) {
 
@@ -2608,28 +2436,70 @@ function renderRespondentList() {
         return;
     }
 
+    const filteredIds =
+        ids.filter(id => {
 
-    ids.forEach(id => {
+            const respondent =
+                respondents[id];
+
+            const risk =
+                calculateRisk(
+                    respondent.entries || []
+                );
+
+            const matchesSearch =
+                !search ||
+                String(
+                    respondent.id || id
+                )
+                .toLowerCase()
+                .includes(search);
+
+            const matchesRisk =
+                filter === "ALL" ||
+                risk.level === filter;
+
+            return (
+                matchesSearch &&
+                matchesRisk
+            );
+
+        });
+
+    if (filteredIds.length === 0) {
+
+        container.innerHTML =
+            '<p class="no-data">No respondents match the selected search or filter.</p>';
+
+        return;
+    }
+
+    filteredIds.forEach(id => {
 
         const respondent =
             respondents[id];
-
 
         const risk =
             calculateRisk(
                 respondent.entries || []
             );
 
-
         const div =
             document.createElement(
                 "div"
             );
 
-
         div.className =
             "respondent-card";
 
+        const riskClass =
+            risk.level === "LOW"
+                ? "risk-low"
+                : risk.level === "MODERATE"
+                    ? "risk-moderate"
+                    : risk.level === "HIGH"
+                        ? "risk-high"
+                        : "risk-no-data";
 
         div.innerHTML = `
 
@@ -2659,9 +2529,9 @@ function renderRespondentList() {
 
             <p>
                 Risk:
-                <strong>
+                <span class="risk-badge ${riskClass}">
                     ${risk.level}
-                </strong>
+                </span>
             </p>
 
             <div class="respondent-buttons">
@@ -2683,7 +2553,6 @@ function renderRespondentList() {
 
         `;
 
-
         container.appendChild(
             div
         );
@@ -2691,7 +2560,6 @@ function renderRespondentList() {
     });
 
 }
-
 
 // =====================================================
 // ESCAPE
@@ -2711,7 +2579,6 @@ function escapeQuotes(value) {
 
 }
 
-
 // =====================================================
 // DELETE RESPONDENT
 // =====================================================
@@ -2723,14 +2590,11 @@ function deleteRespondent(id) {
             "Delete this respondent and all of its stored dietary data?"
         );
 
-
     if (!confirmed) {
         return;
     }
 
-
     delete respondents[id];
-
 
     localStorage.setItem(
         "nutriRespondents",
@@ -2738,7 +2602,6 @@ function deleteRespondent(id) {
             respondents
         )
     );
-
 
     if (
         currentRespondentId === id
@@ -2754,7 +2617,6 @@ function deleteRespondent(id) {
 
 }
 
-
 // =====================================================
 // RESEARCH DASHBOARD
 // =====================================================
@@ -2766,7 +2628,6 @@ function getResearchStats() {
             respondents
         );
 
-
     let low = 0;
     let moderate = 0;
     let high = 0;
@@ -2776,26 +2637,21 @@ function getResearchStats() {
     let totalEntries = 0;
     let respondentsWithData = 0;
 
-
     ids.forEach(id => {
 
         const respondent =
             respondents[id];
 
-
         const respondentEntries =
             respondent.entries || [];
-
 
         const risk =
             calculateRisk(
                 respondentEntries
             );
 
-
         totalEntries +=
             respondentEntries.length;
-
 
         respondentEntries.forEach(
             entry => {
@@ -2807,7 +2663,6 @@ function getResearchStats() {
 
             }
         );
-
 
         if (
             risk.level === "LOW"
@@ -2837,7 +2692,6 @@ function getResearchStats() {
         }
 
     });
-
 
     return {
 
@@ -2874,36 +2728,30 @@ function getResearchStats() {
 
 }
 
-
 function renderResearchDashboard() {
 
     const stats =
         getResearchStats();
-
 
     document.getElementById(
         "dashboardTotal"
     ).textContent =
         stats.total;
 
-
     document.getElementById(
         "dashboardLow"
     ).textContent =
         stats.low;
-
 
     document.getElementById(
         "dashboardModerate"
     ).textContent =
         stats.moderate;
 
-
     document.getElementById(
         "dashboardHigh"
     ).textContent =
         stats.high;
-
 
     document.getElementById(
         "dashboardWater"
@@ -2911,30 +2759,25 @@ function renderResearchDashboard() {
         stats.averageWater
             .toFixed(0);
 
-
     document.getElementById(
         "dashboardEntries"
     ).textContent =
         stats.averageEntries
             .toFixed(1);
 
-
     document.getElementById(
         "dashboardNoData"
     ).textContent =
         stats.noData;
-
 
     document.getElementById(
         "dashboardWithData"
     ).textContent =
         stats.respondentsWithData;
 
-
     renderDashboardTable();
 
 }
-
 
 // =====================================================
 // DASHBOARD TABLE
@@ -2947,15 +2790,12 @@ function renderDashboardTable() {
             "dashboardTableBody"
         );
 
-
     body.innerHTML = "";
-
 
     const ids =
         Object.keys(
             respondents
         );
-
 
     if (ids.length === 0) {
 
@@ -2974,25 +2814,20 @@ function renderDashboardTable() {
         return;
     }
 
-
     ids.forEach(id => {
 
         const respondent =
             respondents[id];
 
-
         const respondentEntries =
             respondent.entries || [];
-
 
         const risk =
             calculateRisk(
                 respondentEntries
             );
 
-
         let water = 0;
-
 
         respondentEntries.forEach(
             entry => {
@@ -3005,12 +2840,10 @@ function renderDashboardTable() {
             }
         );
 
-
         const row =
             document.createElement(
                 "tr"
             );
-
 
         row.innerHTML = `
 
@@ -3044,7 +2877,6 @@ function renderDashboardTable() {
 
         `;
 
-
         body.appendChild(
             row
         );
@@ -3052,7 +2884,6 @@ function renderDashboardTable() {
     });
 
 }
-
 
 // =====================================================
 // VISUALIZATION
@@ -3063,24 +2894,20 @@ function renderVisualizations() {
     const stats =
         getResearchStats();
 
-
     document.getElementById(
         "visualTotal"
     ).textContent =
         stats.total;
-
 
     document.getElementById(
         "visualWithData"
     ).textContent =
         stats.respondentsWithData;
 
-
     document.getElementById(
         "visualNoData"
     ).textContent =
         stats.noData;
-
 
     document.getElementById(
         "visualAverageWater"
@@ -3088,13 +2915,11 @@ function renderVisualizations() {
         stats.averageWater
             .toFixed(0);
 
-
     document.getElementById(
         "visualAverageEntries"
     ).textContent =
         stats.averageEntries
             .toFixed(1);
-
 
     drawRiskChart(
         stats.low,
@@ -3102,18 +2927,15 @@ function renderVisualizations() {
         stats.high
     );
 
-
     drawWaterChart(
         stats.averageWater
     );
-
 
     drawEntriesChart(
         stats.averageEntries
     );
 
 }
-
 
 // =====================================================
 // RISK PIE/DONUT CHART
@@ -3130,12 +2952,10 @@ function drawRiskChart(
             "riskChart"
         );
 
-
     const ctx =
         canvas.getContext(
             "2d"
         );
-
 
     ctx.clearRect(
         0,
@@ -3144,12 +2964,10 @@ function drawRiskChart(
         canvas.height
     );
 
-
     const total =
         low +
         moderate +
         high;
-
 
     if (total === 0) {
 
@@ -3165,7 +2983,6 @@ function drawRiskChart(
             canvas.height / 2
         );
 
-
         document.getElementById(
             "riskLegend"
         ).innerHTML =
@@ -3174,13 +2991,11 @@ function drawRiskChart(
         return;
     }
 
-
     const values = [
         low,
         moderate,
         high
     ];
-
 
     const labels = [
         "Low",
@@ -3188,13 +3003,11 @@ function drawRiskChart(
         "High"
     ];
 
-
     const colors = [
         "#2e8b57",
         "#d99a2b",
         "#b23b3b"
     ];
-
 
     const centerX =
         canvas.width / 2;
@@ -3205,10 +3018,8 @@ function drawRiskChart(
     const radius =
         90;
 
-
     let startAngle =
         -Math.PI / 2;
-
 
     values.forEach(
         (value, index) => {
@@ -3217,7 +3028,6 @@ function drawRiskChart(
                 return;
             }
 
-
             const sliceAngle =
                 (
                     value /
@@ -3225,7 +3035,6 @@ function drawRiskChart(
                 ) *
                 Math.PI *
                 2;
-
 
             ctx.beginPath();
 
@@ -3250,13 +3059,11 @@ function drawRiskChart(
 
             ctx.fill();
 
-
             startAngle +=
                 sliceAngle;
 
         }
     );
-
 
     ctx.beginPath();
 
@@ -3272,7 +3079,6 @@ function drawRiskChart(
         "white";
 
     ctx.fill();
-
 
     ctx.font =
         "bold 20px Arial";
@@ -3292,9 +3098,7 @@ function drawRiskChart(
         centerY
     );
 
-
     let legendHTML = "";
-
 
     values.forEach(
         (value, index) => {
@@ -3305,7 +3109,6 @@ function drawRiskChart(
                     total
                 ) *
                 100;
-
 
             legendHTML += `
 
@@ -3327,14 +3130,12 @@ function drawRiskChart(
         }
     );
 
-
     document.getElementById(
         "riskLegend"
     ).innerHTML =
         legendHTML;
 
 }
-
 
 // =====================================================
 // WATER BAR CHART
@@ -3349,12 +3150,10 @@ function drawWaterChart(
             "waterChart"
         );
 
-
     const ctx =
         canvas.getContext(
             "2d"
         );
-
 
     ctx.clearRect(
         0,
@@ -3363,23 +3162,16 @@ function drawWaterChart(
         canvas.height
     );
 
-
     const maxWater =
         2000;
 
-
     const barX = 70;
-
     const barY = 40;
-
     const barWidth = 280;
-
     const barHeight = 45;
-
 
     ctx.fillStyle =
         "#dfe9e3";
-
 
     ctx.fillRect(
         barX,
@@ -3388,7 +3180,6 @@ function drawWaterChart(
         barHeight
     );
 
-
     const percentage =
         Math.min(
             averageWater /
@@ -3396,10 +3187,8 @@ function drawWaterChart(
             1
         );
 
-
     ctx.fillStyle =
         "#2e8b57";
-
 
     ctx.fillRect(
         barX,
@@ -3409,17 +3198,14 @@ function drawWaterChart(
         barHeight
     );
 
-
     ctx.fillStyle =
         "#1f3d32";
-
 
     ctx.font =
         "bold 20px Arial";
 
     ctx.textAlign =
         "center";
-
 
     ctx.fillText(
         averageWater.toFixed(0) +
@@ -3428,17 +3214,14 @@ function drawWaterChart(
         125
     );
 
-
     ctx.font =
         "14px Arial";
-
 
     ctx.fillText(
         "0 mL",
         barX,
         160
     );
-
 
     ctx.fillText(
         "2000 mL",
@@ -3447,10 +3230,8 @@ function drawWaterChart(
         160
     );
 
-
     ctx.textAlign =
         "left";
-
 
     ctx.fillText(
         "Average recorded water intake",
@@ -3459,7 +3240,6 @@ function drawWaterChart(
     );
 
 }
-
 
 // =====================================================
 // ENTRIES BAR CHART
@@ -3474,12 +3254,10 @@ function drawEntriesChart(
             "entriesChart"
         );
 
-
     const ctx =
         canvas.getContext(
             "2d"
         );
-
 
     ctx.clearRect(
         0,
@@ -3487,7 +3265,6 @@ function drawEntriesChart(
         canvas.width,
         canvas.height
     );
-
 
     const maxEntries =
         Math.max(
@@ -3497,19 +3274,13 @@ function drawEntriesChart(
             ) + 2
         );
 
-
     const chartX = 70;
-
     const chartY = 220;
-
     const chartWidth = 300;
-
     const chartHeight = 150;
-
 
     ctx.strokeStyle =
         "#cbd8d1";
-
 
     ctx.beginPath();
 
@@ -3526,10 +3297,8 @@ function drawEntriesChart(
 
     ctx.stroke();
 
-
     ctx.fillStyle =
         "#2e8b57";
-
 
     const barHeight =
         (
@@ -3537,7 +3306,6 @@ function drawEntriesChart(
             maxEntries
         ) *
         chartHeight;
-
 
     ctx.fillRect(
 
@@ -3553,18 +3321,14 @@ function drawEntriesChart(
 
     );
 
-
     ctx.fillStyle =
         "#1f3d32";
-
 
     ctx.font =
         "bold 20px Arial";
 
-
     ctx.textAlign =
         "center";
-
 
     ctx.fillText(
         averageEntries.toFixed(1),
@@ -3574,10 +3338,8 @@ function drawEntriesChart(
             15
     );
 
-
     ctx.font =
         "14px Arial";
-
 
     ctx.fillText(
         "Average entries",
@@ -3586,7 +3348,6 @@ function drawEntriesChart(
     );
 
 }
-
 
 // =====================================================
 // RESEARCH SUMMARY
@@ -3600,7 +3361,6 @@ function renderResearchSummary() {
                 currentRespondentId
               ]
             : null;
-
 
     if (!respondent) {
 
@@ -3617,7 +3377,6 @@ function renderResearchSummary() {
 
         ];
 
-
         ids.forEach(id => {
 
             document.getElementById(
@@ -3627,99 +3386,82 @@ function renderResearchSummary() {
 
         });
 
-
         document.getElementById(
             "summaryEntries"
         ).textContent =
             "0";
-
 
         document.getElementById(
             "summaryWater"
         ).textContent =
             "0";
 
-
         document.getElementById(
             "summaryCalories"
         ).textContent =
             "0";
-
 
         document.getElementById(
             "summaryCarbs"
         ).textContent =
             "0";
 
-
         document.getElementById(
             "summaryProtein"
         ).textContent =
             "0";
-
 
         document.getElementById(
             "summaryFat"
         ).textContent =
             "0";
 
-
         document.getElementById(
             "researchTableBody"
         ).innerHTML = "";
 
-
         return;
     }
-
 
     const risk =
         calculateRisk(
             respondent.entries || []
         );
 
-
     const totals =
         calculateTotalsForEntries(
             respondent.entries || []
         );
-
 
     document.getElementById(
         "summaryRespondentId"
     ).textContent =
         respondent.id || "-";
 
-
     document.getElementById(
         "summaryAge"
     ).textContent =
         respondent.age || "-";
-
 
     document.getElementById(
         "summarySex"
     ).textContent =
         respondent.sex || "-";
 
-
     document.getElementById(
         "summaryGrade"
     ).textContent =
         respondent.grade || "-";
-
 
     document.getElementById(
         "summarySection"
     ).textContent =
         respondent.section || "-";
 
-
     document.getElementById(
         "summaryDate"
     ).textContent =
         respondent.date || "-";
-
 
     document.getElementById(
         "summaryRiskScore"
@@ -3728,12 +3470,10 @@ function renderResearchSummary() {
             ? "-"
             : risk.score;
 
-
     document.getElementById(
         "summaryRiskLevel"
     ).textContent =
         risk.level;
-
 
     document.getElementById(
         "summaryEntries"
@@ -3743,43 +3483,36 @@ function renderResearchSummary() {
             []
         ).length;
 
-
     document.getElementById(
         "summaryWater"
     ).textContent =
         totals.water;
-
 
     document.getElementById(
         "summaryCalories"
     ).textContent =
         totals.calories.toFixed(1);
 
-
     document.getElementById(
         "summaryCarbs"
     ).textContent =
         totals.carbs.toFixed(1);
-
 
     document.getElementById(
         "summaryProtein"
     ).textContent =
         totals.protein.toFixed(1);
 
-
     document.getElementById(
         "summaryFat"
     ).textContent =
         totals.fat.toFixed(1);
-
 
     renderResearchTable(
         respondent.entries || []
     );
 
 }
-
 
 // =====================================================
 // RESEARCH TABLE
@@ -3794,9 +3527,7 @@ function renderResearchTable(
             "researchTableBody"
         );
 
-
     body.innerHTML = "";
-
 
     if (data.length === 0) {
 
@@ -3815,7 +3546,6 @@ function renderResearchTable(
         return;
     }
 
-
     data.forEach(
         entry => {
 
@@ -3823,7 +3553,6 @@ function renderResearchTable(
                 document.createElement(
                     "tr"
                 );
-
 
             row.innerHTML = `
 
@@ -3855,7 +3584,6 @@ function renderResearchTable(
 
             `;
 
-
             body.appendChild(
                 row
             );
@@ -3864,7 +3592,6 @@ function renderResearchTable(
     );
 
 }
-
 
 // =====================================================
 // CURRENT CSV
@@ -3886,22 +3613,18 @@ function downloadCSV() {
         return;
     }
 
-
     const respondent =
         respondents[
             currentRespondentId
         ];
-
 
     const risk =
         calculateRisk(
             respondent.entries || []
         );
 
-
     let csv =
         "Respondent ID,Age,Sex,Grade,Section,Date,Meal,Food/Beverage,Category,Serving,Water (mL),Calories,Carbohydrates,Protein,Fat,Risk Score,Risk Level\n";
-
 
     (
         respondent.entries ||
@@ -3942,7 +3665,6 @@ function downloadCSV() {
         }
     );
 
-
     downloadTextFile(
         csv,
         respondent.id +
@@ -3950,7 +3672,6 @@ function downloadCSV() {
     );
 
 }
-
 
 // =====================================================
 // ALL CSV
@@ -3963,7 +3684,6 @@ function downloadAllCSV() {
             respondents
         );
 
-
     if (ids.length === 0) {
 
         alert(
@@ -3973,22 +3693,18 @@ function downloadAllCSV() {
         return;
     }
 
-
     let csv =
         "Respondent ID,Age,Sex,Grade,Section,Date,Meal,Food/Beverage,Category,Serving,Water (mL),Calories,Carbohydrates,Protein,Fat,Risk Score,Risk Level\n";
-
 
     ids.forEach(id => {
 
         const respondent =
             respondents[id];
 
-
         const risk =
             calculateRisk(
                 respondent.entries || []
             );
-
 
         (
             respondent.entries ||
@@ -4031,14 +3747,12 @@ function downloadAllCSV() {
 
     });
 
-
     downloadTextFile(
         csv,
         "NUTRI_All_Respondents.csv"
     );
 
 }
-
 
 // =====================================================
 // CSV ESCAPE
@@ -4055,10 +3769,8 @@ function csvEscape(value) {
 
     }
 
-
     const stringValue =
         String(value);
-
 
     if (
         stringValue.includes(",") ||
@@ -4075,11 +3787,9 @@ function csvEscape(value) {
 
     }
 
-
     return stringValue;
 
 }
-
 
 // =====================================================
 // DOWNLOAD
@@ -4099,18 +3809,15 @@ function downloadTextFile(
             }
         );
 
-
     const url =
         URL.createObjectURL(
             blob
         );
 
-
     const link =
         document.createElement(
             "a"
         );
-
 
     link.href =
         url;
@@ -4118,26 +3825,21 @@ function downloadTextFile(
     link.download =
         filename;
 
-
     document.body.appendChild(
         link
     );
 
-
     link.click();
-
 
     document.body.removeChild(
         link
     );
-
 
     URL.revokeObjectURL(
         url
     );
 
 }
-
 
 // =====================================================
 // PRINT
@@ -4148,7 +3850,6 @@ function printResearchSummary() {
     window.print();
 
 }
-
 
 // =====================================================
 // CLEAR DATA
@@ -4165,33 +3866,26 @@ function clearCurrentData() {
         return;
     }
 
-
     const confirmed =
         confirm(
             "Clear all dietary data for the current respondent?"
         );
 
-
     if (!confirmed) {
         return;
     }
 
-
     entries = [];
-
 
     respondents[
         currentRespondentId
     ].entries = [];
 
-
     saveData();
-
 
     renderAll();
 
 }
-
 
 // =====================================================
 // RENDER EVERYTHING
@@ -4217,7 +3911,6 @@ function renderAll() {
 
 }
 
-
 // =====================================================
 // LOAD SAVED RESPONDENT
 // =====================================================
@@ -4238,12 +3931,10 @@ function loadSavedCurrentRespondent() {
         return;
     }
 
-
     const ids =
         Object.keys(
             respondents
         );
-
 
     if (ids.length > 0) {
 
@@ -4258,7 +3949,6 @@ function loadSavedCurrentRespondent() {
     }
 
 }
-
 
 // =====================================================
 // STARTUP
