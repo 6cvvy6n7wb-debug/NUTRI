@@ -572,3 +572,35 @@ footer p {
         grid-template-columns: 1fr;
     }
 }
+/* =========================
+   RISK LEVEL BADGES
+========================= */
+
+.risk-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.risk-low {
+    background-color: #e8f7ee;
+    color: #237a4b;
+}
+
+.risk-moderate {
+    background-color: #fff5d9;
+    color: #9a6b00;
+}
+
+.risk-high {
+    background-color: #fde8e8;
+    color: #b42318;
+}
+
+.risk-no-data {
+    background-color: #eef2f0;
+    color: #65756e;
+}
