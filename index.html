@@ -1,9 +1,17 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>NUTRI - Nutrient Tracker</title>
-    <base href="https://www.NUTRI.com/" target="_blank">
-    <link rel="stylesheet" href="style.css">
+
+    <meta name="description" content="NUTRI is a research prototype designed to collect dietary and water-intake data for UTI risk inference among Senior High School students.">
+    <meta name="theme-color" content="#23865a">
+
+    <!-- Load the existing stylesheet from this GitHub Pages site -->
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
@@ -12,16 +20,14 @@
         <div class="logo">NUTRI</div>
 
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Research</a>
-            <a href="#">Tracker</a>
+            <a href="./index.html">Home</a>
+            <a href="#about">About</a>
+            <a href="./tracker.html">Research</a>
+            <a href="./tracker.html">Tracker</a>
         </div>
     </nav>
 
-
     <section class="hero">
-
         <div class="hero-text">
 
             <p class="small-title">NUTRIENT TRACKING SYSTEM</p>
@@ -38,10 +44,14 @@
                 School students.
             </p>
 
-            <button>Start Tracking</button>
+            <button
+                type="button"
+                onclick="window.location.href='./tracker.html';"
+            >
+                Start Tracking
+            </button>
 
         </div>
-
 
         <div class="hero-card">
 
@@ -55,11 +65,9 @@
             </p>
 
         </div>
-
     </section>
 
-
-    <section class="about">
+    <section class="about" id="about">
 
         <h2>About NUTRI</h2>
 
@@ -68,18 +76,17 @@
             gather and analyze dietary data among Senior
             High School students. It focuses on identifying
             dietary patterns that may be relevant to UTI
-            risk inference.
+            risk inference. The system is intended for
+            research purposes and does not provide a
+            medical diagnosis.
         </p>
 
     </section>
 
-
     <footer>
-
         <p>
             NUTRI Research Project | For Research Purposes Only
         </p>
-
     </footer>
 
 </body>
