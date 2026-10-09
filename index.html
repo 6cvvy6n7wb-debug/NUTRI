@@ -7,14 +7,14 @@
 
     <title>NUTRI | Nutrient Tracker for UTI Risk Inference</title>
 
-    <meta name="description" content="NUTRI is a nutrient tracking system designed to collect dietary and water-intake data for research-based UTI risk inference among Senior High School students.">
-    <meta name="keywords" content="NUTRI, nutrient tracker, UTI risk inference, dietary tracker, water intake, Senior High School students, research, Philippines">
+    <meta name="description" content="NUTRI is a nutrient tracking research prototype for recording dietary and water-intake data among Senior High School students.">
+    <meta name="keywords" content="NUTRI, nutrient tracker, dietary tracker, water intake, UTI research, Senior High School students, Philippines">
     <meta name="author" content="NUTRI Research Team">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#23865a">
 
     <meta property="og:title" content="NUTRI | Nutrient Tracker">
-    <meta property="og:description" content="A nutrient tracking system for dietary and water-intake data and research-based UTI risk inference among Senior High School students.">
+    <meta property="og:description" content="A research prototype for recording dietary and water-intake data among Senior High School students.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://6cvvy6n7wb-debug.github.io/NUTRI/">
 
@@ -28,74 +28,85 @@
         "name": "NUTRI",
         "alternateName": "Nutrient Tracker",
         "url": "https://6cvvy6n7wb-debug.github.io/NUTRI/",
-        "description": "A research prototype for organizing dietary and water-intake data for UTI risk inference among Senior High School students.",
-        "inLanguage": "en",
-        "about": {
-            "@type": "Thing",
-            "name": "Nutrient Tracking and UTI Risk Inference Research"
-        }
+        "description": "A research prototype for recording dietary and water-intake data among Senior High School students.",
+        "inLanguage": "en"
     }
     </script>
 </head>
 
 <body>
     <nav>
-        <a class="logo" href="index.html" aria-label="NUTRI Home">NUTRI</a>
+        <a class="logo" href="index.html">NUTRI</a>
 
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="#about">About</a>
+            <a href="tracker.html#research-dashboard">Research</a>
             <a href="tracker.html">Tracker</a>
         </div>
     </nav>
 
-    <main>
-        <section class="hero">
-            <div class="hero-text">
-                <p class="small-title">NUTRIENT TRACKING SYSTEM</p>
+    <section class="hero">
+        <div class="hero-text">
+            <p class="small-title">NUTRIENT TRACKING SYSTEM</p>
 
-                <h1>
-                    Track Your
-                    <span>Nutrition.</span>
-                    Understand Your Risk.
-                </h1>
-
-                <p>
-                    NUTRI is a nutrient tracking system designed to collect
-                    dietary and water-intake data for research-based UTI risk
-                    inference among Senior High School students.
-                </p>
-
-                <button
-                    type="button"
-                    onclick="window.location.href='./tracker.html';"
-                >
-                    Start Tracking
-                </button>
-            </div>
-
-            <div class="hero-card">
-                <div class="card-icon" aria-hidden="true">🥗</div>
-                <h2>Better Data</h2>
-                <p>
-                    Record food, beverages, meals, and water intake in one
-                    organized research system.
-                </p>
-            </div>
-        </section>
-
-        <section class="about" id="about">
-            <h2>About NUTRI</h2>
+            <h1>
+                Track Your
+                <span>Nutrition.</span>
+                Understand Your Data.
+            </h1>
 
             <p>
-                NUTRI stands for Nutrient Tracker. It is a research prototype
-                developed to collect and organize dietary and water-intake
-                information among Senior High School students. The collected
-                data may be used for research-based risk inference and does
-                not serve as a medical diagnosis.
+                NUTRI is a nutrient tracking research prototype designed
+                to collect and organize dietary and water-intake data
+                among Senior High School students.
             </p>
-        </section>
-    </main>
+
+            <button type="button"
+                onclick="window.location.href='./tracker.html';">
+                Start Tracking
+            </button>
+        </div>
+
+        <div class="hero-card">
+            <div class="card-icon">🥗</div>
+            <h2>Better Data</h2>
+            <p>
+                Record food, beverages, meals, and water intake
+                in one organized research system.
+            </p>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h2>About NUTRI</h2>
+
+        <p>
+            NUTRI stands for Nutrient Tracker. It is a research prototype
+            developed to collect and organize dietary and water-intake
+            information among Senior High School students. The system
+            summarizes recorded data and generates an experimental
+            risk-inference score. Its output is not a medical diagnosis,
+            and its scoring method has not been clinically validated.
+        </p>
+    </section>
+
+    <section class="about" id="research">
+        <h2>About the Research</h2>
+
+        <p>
+            This project explores how a nutrient tracking system can
+            organize dietary and water-intake data for research purposes.
+            The results should be interpreted cautiously and must not
+            be used to diagnose or predict a urinary tract infection.
+            Consult a qualified health professional for medical concerns.
+        </p>
+
+        <button type="button"
+            onclick="window.location.href='./tracker.html#research-dashboard';">
+            View Research Dashboard
+        </button>
+    </section>
 
     <footer>
         <p>© 2026 NUTRI Research Prototype</p>
