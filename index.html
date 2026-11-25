@@ -1,155 +1,197 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>NUTRI | Nutrient Tracker for UTI Risk Inference</title>
-
-    <meta
-        name="description"
-        content="NUTRI is a nutrient tracking system designed to collect dietary and water-intake data for research-based UTI risk inference among Senior High School students."
-    >
-
-    <meta
-        name="keywords"
-        content="NUTRI, nutrient tracker, UTI risk inference, dietary tracker, water intake, Senior High School students, research, Philippines"
-    >
-
-    <meta name="author" content="NUTRI Research Team">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#23865a">
-
-    <meta
-        property="og:title"
-        content="NUTRI | Nutrient Tracker"
-    >
-
-    <meta
-        property="og:description"
-        content="A nutrient tracking system for dietary and water-intake data and research-based UTI risk inference among Senior High School students."
-    >
-
-    <meta property="og:type" content="website">
-
-    <meta
-        property="og:url"
-        content="https://6cvvy6n7wb-debug.github.io/NUTRI/"
-    >
-
-    <link
-        rel="canonical"
-        href="https://6cvvy6n7wb-debug.github.io/NUTRI/"
-    >
-
-    <!-- IMPORTANT: Load the existing CSS directly -->
-    <link
-        rel="stylesheet"
-        href="https://6cvvy6n7wb-debug.github.io/NUTRI/style.css"
-    >
-
+    <title>NUTRI - Nutrient Tracker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <nav>
-
-        <div class="logo">
-            NUTRI
-        </div>
+    <nav class="navbar">
+        <a href="index.html" class="logo">NUTRI</a>
 
         <div class="nav-links">
-
-            <a href="./index.html">
-                Home
-            </a>
-
-            <a href="#about">
-                About
-            </a>
-
-            <a href="./tracker.html">
-                Tracker
-            </a>
-
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#research">Research</a>
+            <a href="tracker.html">Tracker</a>
         </div>
-
     </nav>
 
-    <section class="hero">
-
-        <div class="hero-text">
-
-            <p class="small-title">
-                NUTRIENT TRACKING SYSTEM
-            </p>
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <p class="small-title">NUTRITION AND WELLNESS RESEARCH</p>
 
             <h1>
-                Track Your
-                <span>Nutrition.</span>
-                Understand Your Risk.
+                Understand Your Diet.
+                <span>Track Your Nutrition.</span>
             </h1>
 
             <p>
-                NUTRI is a nutrient tracking system designed to collect
-                dietary and water-intake data for research-based UTI risk
-                inference among Senior High School students.
+                NUTRI is a dietary and nutrient tracking system designed
+                to record food consumption, water intake, and selected
+                dietary indicators for research purposes.
             </p>
 
-            <button
-                type="button"
-                onclick="window.location.href='./tracker.html';"
-            >
-                Start Tracking
-            </button>
+            <a href="tracker.html" class="primary-button">
+                Open Tracker
+            </a>
+        </div>
+    </header>
 
+    <section class="about-section" id="about">
+        <div class="section-heading">
+            <p class="small-title">ABOUT NUTRI</p>
+            <h2>What is NUTRI?</h2>
         </div>
 
-        <div class="hero-card">
+        <p>
+            NUTRI is a web-based dietary and nutrient tracking system
+            developed to help collect and organize information about
+            respondents' food intake and water consumption.
+        </p>
 
-            <div class="card-icon">
-                🥗
-            </div>
+        <p>
+            The system provides estimated nutrient information,
+            summarizes recorded dietary data, and generates
+            research-oriented indicators based on the information
+            entered by the respondents.
+        </p>
 
-            <h2>
-                Better Data
-            </h2>
+        <p>
+            NUTRI is intended for academic research and data collection.
+            It is not designed to diagnose diseases or replace
+            professional medical assessment.
+        </p>
+    </section>
+
+    <section class="features-section" id="features">
+        <div class="section-heading">
+            <p class="small-title">SYSTEM FEATURES</p>
+            <h2>What Can NUTRI Do?</h2>
+        </div>
+
+        <div class="features-grid">
+
+            <article class="feature-card">
+                <div class="feature-icon">01</div>
+                <h3>Dietary Tracking</h3>
+                <p>
+                    Record food consumption according to meal periods
+                    and serving sizes.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon">02</div>
+                <h3>Nutrient Estimation</h3>
+                <p>
+                    View estimated calories, carbohydrates, protein,
+                    and fat based on recorded food entries.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon">03</div>
+                <h3>Water Intake Monitoring</h3>
+                <p>
+                    Record water consumption and view accumulated
+                    intake throughout the data collection period.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon">04</div>
+                <h3>Research Dashboard</h3>
+                <p>
+                    Organize respondent records and view summarized
+                    dietary information.
+                </p>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="research-section" id="research">
+        <div class="research-content">
+            <p class="small-title">OUR RESEARCH</p>
+
+            <h2>Supporting Dietary Data Collection</h2>
 
             <p>
-                Record your food, beverages, meals, and water intake
-                in one organized research system.
+                The NUTRI system supports the collection and organization
+                of dietary information for the study. Recorded data may
+                be used to examine selected dietary patterns and
+                research indicators among respondents.
             </p>
 
+            <p>
+                The system's generated scores are experimental
+                research indicators and are not clinically validated
+                medical risk assessments.
+            </p>
+
+            <a href="tracker.html" class="primary-button">
+                Start Recording
+            </a>
+        </div>
+    </section>
+
+    <section class="how-section">
+        <div class="section-heading">
+            <p class="small-title">HOW IT WORKS</p>
+            <h2>Using the NUTRI System</h2>
         </div>
 
+        <div class="steps-grid">
+            <div class="step-card">
+                <span>01</span>
+                <h3>Create a Respondent Profile</h3>
+                <p>Enter the respondent's basic information.</p>
+            </div>
+
+            <div class="step-card">
+                <span>02</span>
+                <h3>Record Dietary Intake</h3>
+                <p>Add food entries and corresponding water intake.</p>
+            </div>
+
+            <div class="step-card">
+                <span>03</span>
+                <h3>Review the Results</h3>
+                <p>View nutrient estimates and research summaries.</p>
+            </div>
+
+            <div class="step-card">
+                <span>04</span>
+                <h3>Export Research Data</h3>
+                <p>Generate CSV files for research documentation.</p>
+            </div>
+        </div>
     </section>
 
-    <section class="about" id="about">
-
-        <h2>
-            About NUTRI
-        </h2>
-
+    <section class="tracker-callout">
+        <h2>Start Tracking with NUTRI</h2>
         <p>
-            NUTRI stands for Nutrient Tracker. It is a research prototype
-            developed to collect and organize dietary and water-intake
-            information among Senior High School students. The collected
-            data can be used for research-based risk inference and does
-            not serve as a medical diagnosis.
+            Organize dietary information and review your recorded
+            research data in one place.
         </p>
 
+        <a href="tracker.html" class="primary-button">
+            Go to Tracker
+        </a>
     </section>
 
-    <footer>
-
-        <p>
-            © 2026 NUTRI Research Prototype
+    <footer class="footer">
+        <h2>NUTRI</h2>
+        <p>Dietary and Nutrient Tracking System</p>
+        <p class="copyright">
+            © 2026 NUTRI Research Project. All rights reserved.
         </p>
-
     </footer>
 
+    <script src="script.js"></script>
 </body>
-
 </html>
